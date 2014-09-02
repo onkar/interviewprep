@@ -57,6 +57,7 @@ public class FetchBananas {
     }
 
     System.out.println("Total fetched bananas : " + totalBananasCollected);
+    executor.shutdown();
   }
 
 }
