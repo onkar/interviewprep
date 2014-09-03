@@ -16,7 +16,7 @@ public class SelectionSort {
     this.size = n;
   }
 
-  private void sort() {
+  public void sort() {
     int minimumIndex, j;
 
     for (int i = 0; i < size - 1; i++) {
@@ -36,20 +36,6 @@ public class SelectionSort {
     int temp = array[minimumIndex];
     array[minimumIndex] = array[i];
     array[i] = temp;
-  }
-
-  private void print() {
-    for (int i = 0; i < size; i++) {
-      System.out.print(array[i] + " ");
-    }
-    System.out.println("");
-  }
-
-  public static void main(String[] args) {
-    int arr[] = {64, 25, 12, 22, 11};
-    SelectionSort ss = new SelectionSort(arr, 5);
-    ss.sort();
-    ss.print();
   }
 
 }

@@ -16,14 +16,7 @@ public class InsertionSort {
     this.size = size;
   }
 
-  private void print() {
-    for (int i = 0; i < size; i++) {
-      System.out.print(array[i] + " ");
-    }
-    System.out.println("");
-  }
-
-  private void sort() {
+  public void sort() {
     int key, j;
     for (int i = 1; i < size; i++) {
       key = array[i];
@@ -36,13 +29,6 @@ public class InsertionSort {
       }
       array[j + 1] = key;
     }
-  }
-
-  public static void main(String[] args) {
-    int array[] = {12, 11, 13, 5, 6};
-    InsertionSort is = new InsertionSort(array, 5);
-    is.sort();
-    is.print();
   }
 
 }
