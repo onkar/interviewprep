@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Random;
 
+import main.HeapSort;
 import main.InsertionSort;
 import main.MergeSort;
 import main.SelectionSort;
@@ -53,6 +54,13 @@ public class SortingTest {
   public void testMergeSort() throws Exception {
     MergeSort ms = new MergeSort();
     ms.sort(numbers);
+    checkSorting();
+  }
+
+  @Test
+  public void testHeapSort() throws Exception {
+    HeapSort hs = new HeapSort(numbers, Size);
+    hs.sort();
     checkSorting();
   }
 }
