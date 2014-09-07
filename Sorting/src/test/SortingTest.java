@@ -8,6 +8,7 @@ import java.util.Random;
 import main.HeapSort;
 import main.InsertionSort;
 import main.MergeSort;
+import main.QuickSort;
 import main.SelectionSort;
 
 import org.junit.Before;
@@ -31,10 +32,10 @@ public class SortingTest {
   public void testInsertionSort() throws Exception {
     InsertionSort is = new InsertionSort(numbers, Size);
     is.sort();
-    checkSorting();
+    testSorting();
   }
 
-  private void checkSorting() {
+  private void testSorting() {
     for (int i = 0; i < numbers.length - 1; i++) {
       if (numbers[i] > numbers[i + 1]) {
         fail("Array is not sorted...");
@@ -47,20 +48,27 @@ public class SortingTest {
   public void testSelectionSort() throws Exception {
     SelectionSort ss = new SelectionSort(numbers, Size);
     ss.sort();
-    checkSorting();
+    testSorting();
   }
 
   @Test
   public void testMergeSort() throws Exception {
     MergeSort ms = new MergeSort();
     ms.sort(numbers);
-    checkSorting();
+    testSorting();
   }
 
   @Test
   public void testHeapSort() throws Exception {
     HeapSort hs = new HeapSort(numbers, Size);
     hs.sort();
-    checkSorting();
+    testSorting();
+  }
+
+  @Test
+  public void testQuickSort() throws Exception {
+    QuickSort qs = new QuickSort(numbers);
+    qs.sort(0, Size - 1);
+    testSorting();
   }
 }
