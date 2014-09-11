@@ -86,4 +86,28 @@ public class LinkedListTest {
     Assert.assertEquals(ll.head.next.next.next.next.next.data, 5);
     Assert.assertEquals(ll.head.next.next.next.next.next.next.data, 7);
   }
+
+  @Test
+  public void testReverseAlternateAndAppendEvenNodes() {
+    ll.reverseAlternateAndAppend();
+    Assert.assertEquals(ll.head.data, 1);
+    Assert.assertEquals(ll.head.next.data, 3);
+    Assert.assertEquals(ll.head.next.next.data, 5);
+    Assert.assertEquals(ll.head.next.next.next.data, 6);
+    Assert.assertEquals(ll.head.next.next.next.next.data, 4);
+    Assert.assertEquals(ll.head.next.next.next.next.next.data, 2);
+  }
+  
+  @Test
+  public void testReverseAlternateAndAppendOddNodes() {
+    ll.insert(7);
+    ll.reverseAlternateAndAppend();
+    Assert.assertEquals(ll.head.data, 1);
+    Assert.assertEquals(ll.head.next.data, 3);
+    Assert.assertEquals(ll.head.next.next.data, 5);
+    Assert.assertEquals(ll.head.next.next.next.data, 7);
+    Assert.assertEquals(ll.head.next.next.next.next.data, 6);
+    Assert.assertEquals(ll.head.next.next.next.next.next.data, 4);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.data, 2);
+  }
 }

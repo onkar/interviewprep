@@ -76,8 +76,6 @@ public class LinkedList {
    * linked list is 1->2->3->4->5->6 then the function should change it to 2->1->4->3->6->5
    * </pre>
    * 
-   * @author onkar.deshpande@gmail.com (Onkar Deshpande)
-   * 
    */
   public void pairWiseSwap() {
     if (head == null || head.next == null) {
@@ -114,4 +112,66 @@ public class LinkedList {
       current = previous.next;
     }
   }
+
+  /**
+   * <pre>
+   * Given a linked list, reverse alternate nodes and append them to end of list. Extra allowed space is O(1)
+   * Examples -
+   * 
+   * Input List:  1->2->3->4->5->6
+   * Output List: 1->3->5->6->4->2
+   * 
+   * Input List:  12->14->16->18->20
+   * Output List: 12->16->20->18->14
+   * </pre>
+   */
+  public void reverseAlternateAndAppend() {
+    // Make odd point to the head odd->1
+    ListNode odd = head;
+    // If there are less than 3 nodes in the linked list, nothing needs to be done
+    if (odd == null || odd.next == null || odd.next.next == null) {
+      return;
+    }
+    // Make even point to one node ahead of odd. even->2
+    ListNode even = odd.next;
+    // Make 1's next point to 3. 1->3
+    odd.next = even.next;
+    // Make 2's next point to null, since this is the last element of the final list 2->null
+    even.next = null;
+    // Make odd point to 3 here. odd->3
+    odd = odd.next;
+    // Two pointers to track even and odd nodes
+    ListNode oddTracker = null;
+    ListNode evenTracker = null;
+
+    while (true) {
+      // oddTracker points to next odd node. oddTracker->5
+      oddTracker = odd.next.next;
+      // evenTracker points to next even node. evenTracker->4
+      evenTracker = odd.next;
+      // Make 4's next point to 2. 4->2
+      evenTracker.next = even;
+      // Update even to point to next even node. even->4
+      even = evenTracker;
+      if (oddTracker == null) {
+        // This is the end of linked list when there are even number of nodes. For example, when odd
+        // points to 5 (odd->5), then oddTracker will point to null. That's when we set 6's next to
+        // 4, 6->4 and we break out of the loop
+        odd.next = even;
+        break;
+      } else {
+        // Increment odd to point to next odd element, otherwise.
+        odd.next = oddTracker;
+        if (oddTracker.next == null) {
+          // Exit condition for odd number of nodes. For example, if we have 7 also, oddTracker
+          // points to 7, and 7's next is null. Then make 7's next point to 6. Then break.
+          oddTracker.next = even;
+          break;
+        }
+      }
+      odd = oddTracker;
+    }
+  }
+
+
 }
