@@ -110,4 +110,72 @@ public class LinkedListTest {
     Assert.assertEquals(ll.head.next.next.next.next.next.data, 4);
     Assert.assertEquals(ll.head.next.next.next.next.next.next.data, 2);
   }
+
+  @Test
+  public void testAlternateMerge() {
+    LinkedList l2 = new LinkedList();
+    l2.insert(10);
+    l2.insert(11);
+    
+    ll.mergeAlternate(l2);
+    Assert.assertEquals(ll.head.data, 1);
+    Assert.assertEquals(ll.head.next.data, 10);
+    Assert.assertEquals(ll.head.next.next.data, 2);
+    Assert.assertEquals(ll.head.next.next.next.data, 11);
+    Assert.assertEquals(ll.head.next.next.next.next.data, 3);
+    Assert.assertEquals(ll.head.next.next.next.next.next.data, 4);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.data, 5);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.next.data, 6);
+    Assert.assertNull(l2.head);
+  }
+
+  @Test
+  public void testAlternateMerge2() {
+    LinkedList l2 = new LinkedList();
+    l2.insert(10);
+    l2.insert(11);
+    l2.insert(12);
+    l2.insert(13);
+
+    ll.delete(new ListNode(4));
+    ll.delete(new ListNode(5));
+    ll.delete(new ListNode(6));
+
+    ll.mergeAlternate(l2);
+
+    Assert.assertEquals(ll.head.data, 1);
+    Assert.assertEquals(ll.head.next.data, 10);
+    Assert.assertEquals(ll.head.next.next.data, 2);
+    Assert.assertEquals(ll.head.next.next.next.data, 11);
+    Assert.assertEquals(ll.head.next.next.next.next.data, 3);
+    Assert.assertEquals(ll.head.next.next.next.next.next.data, 12);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.data, 13);
+  }
+
+  @Test
+  public void testAlternateMerge3() {
+    LinkedList l2 = new LinkedList();
+    l2.insert(11);
+    l2.insert(12);
+    l2.insert(13);
+    l2.insert(14);
+    l2.insert(15);
+    l2.insert(16);
+
+    ll.mergeAlternate(l2);
+
+    Assert.assertEquals(ll.head.data, 1);
+    Assert.assertEquals(ll.head.next.data, 11);
+    Assert.assertEquals(ll.head.next.next.data, 2);
+    Assert.assertEquals(ll.head.next.next.next.data, 12);
+    Assert.assertEquals(ll.head.next.next.next.next.data, 3);
+    Assert.assertEquals(ll.head.next.next.next.next.next.data, 13);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.data, 4);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.next.data, 14);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.next.next.data, 5);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.next.next.next.data, 15);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.next.next.next.next.data, 6);
+    Assert.assertEquals(ll.head.next.next.next.next.next.next.next.next.next.next.next.data, 16);
+  }
+
 }

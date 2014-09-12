@@ -173,5 +173,54 @@ public class LinkedList {
     }
   }
 
+  /**
+   * Merge alternate nodes in a linked list.
+   * 
+   * <pre>
+   * List1 : 1->2, List2 : 3->4->5, then result : 1->3->2->4->5
+   * List1 : 1->2->3, List2: 4->5, then result : 1->4->2->5->3 and make List2=null
+   * List1 : 1->2, List2: 3->4, then result : 1->3->2->4
+   * </pre>
+   * 
+   * @param secondList
+   */
+  public void mergeAlternate(LinkedList secondList) {
+    ListNode first = head;
+    LinkedList second = secondList;
+    ListNode firstCurrent = first, secondCurrent = second.head;
+    ListNode firstNext = null;
+    ListNode secondNext = null;
+
+    while (firstCurrent.next != null && secondCurrent.next != null) {
+      // Keep track of next elements in each linked list
+      firstNext = firstCurrent.next;
+      secondNext = secondCurrent.next;
+
+      // Assign pointers to each other
+      firstCurrent.next = secondCurrent;
+      secondCurrent.next = firstNext;
+
+      // Increment
+      firstCurrent = firstNext;
+      secondCurrent = secondNext;
+    }
+    
+    if (firstCurrent.next == null && secondCurrent.next != null) {
+      // Second list is longer, so assign next of first list's last node to second list
+      firstCurrent.next = secondCurrent;
+    } else if (secondCurrent.next == null && firstCurrent.next != null) {
+      // First list is longer, so assign next of second list's last element to next element in first
+      // list
+      secondCurrent.next = firstCurrent.next;
+      // Update first's next to last element in second list
+      firstCurrent.next = secondCurrent;
+      // Set second list's head to null
+      secondList.head = null;
+    } else {
+      // If both lists are of same length, connect first list's last element to second list's last
+      // element
+      firstCurrent.next = secondCurrent;
+    }
+  }
 
 }
