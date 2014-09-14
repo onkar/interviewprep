@@ -223,4 +223,51 @@ public class LinkedList {
     }
   }
 
+  /**
+   * Detect if the linked list has a loop
+   * 
+   * @return
+   */
+  public boolean hasLoop() {
+    ListNode slow = head;
+    ListNode fast = head;
+    while (slow != null && fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow == fast) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Detect and remove the loop in the linked list
+   */
+  public void removeLoop() {
+    ListNode slow = head;
+    ListNode fast = head;
+    while (slow != null && fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+      // Detect the loop
+      if (slow == fast) {
+        // Set slow to the head of the linked list
+        slow = head;
+        // Node to track previous of the fast node. Fast node points to some node inside the loop
+        ListNode fastPrevious = null;
+        // Slow points to head and fast points to some node in the loop, now if we increment both
+        // one place at a time, they will meet at the beginning of the loop
+        while (slow != fast) {
+          slow = slow.next;
+          // fastPrevious point to the previous node of the fast node
+          fastPrevious = fast;
+          fast = fast.next;
+        }
+        // Set the next of fastPrevious to null so that the linked list ends
+        fastPrevious.next = null;
+      }
+    }
+  }
+
 }

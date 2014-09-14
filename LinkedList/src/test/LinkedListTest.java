@@ -178,4 +178,25 @@ public class LinkedListTest {
     Assert.assertEquals(ll.head.next.next.next.next.next.next.next.next.next.next.next.data, 16);
   }
 
+  @Test
+  public void testLoop() {
+    ll.head.next.next.next.next.next.next = ll.head.next;
+    Assert.assertTrue(ll.hasLoop());
+    ll.head.next.next.next.next.next.next = null;
+    Assert.assertFalse(ll.hasLoop());
+  }
+
+  @Test
+  public void removeLoop() {
+    ll.delete(new ListNode(6));
+    ll.head.next.next.next.next.next = ll.head.next.next;
+    ll.removeLoop();
+    Assert.assertEquals(ll.head.data, 1);
+    Assert.assertEquals(ll.head.next.data, 2);
+    Assert.assertEquals(ll.head.next.next.data, 3);
+    Assert.assertEquals(ll.head.next.next.next.data, 4);
+    Assert.assertEquals(ll.head.next.next.next.next.data, 5);
+    Assert.assertNull(ll.head.next.next.next.next.next);
+  }
+
 }
