@@ -199,4 +199,32 @@ public class LinkedListTest {
     Assert.assertNull(ll.head.next.next.next.next.next);
   }
 
+  @Test
+  public void testIntersection() {
+    LinkedList l2 = new LinkedList();
+    l2.insert(2);
+    l2.insert(3);
+    l2.insert(7);
+    LinkedList result = new LinkedList();
+    ll.intersection(ll.head, l2.head, result);
+    Assert.assertEquals(2, result.head.data);
+    Assert.assertEquals(3, result.head.next.data);
+  }
+
+  @Test
+  public void testUnion() {
+    LinkedList l2 = new LinkedList();
+    l2.insert(1);
+    l2.insert(7);
+    LinkedList result = new LinkedList();
+    ll.union(ll.head, l2.head, result);
+    Assert.assertEquals(1, result.head.data);
+    Assert.assertEquals(2, result.head.next.data);
+    Assert.assertEquals(3, result.head.next.next.data);
+    Assert.assertEquals(4, result.head.next.next.next.data);
+    Assert.assertEquals(5, result.head.next.next.next.next.data);
+    Assert.assertEquals(6, result.head.next.next.next.next.next.data);
+    Assert.assertEquals(7, result.head.next.next.next.next.next.next.data);
+  }
+
 }

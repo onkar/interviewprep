@@ -270,4 +270,57 @@ public class LinkedList {
     }
   }
 
+  /**
+   * Intersection of two sorted linked lists
+   * 
+   * @param first
+   * @param second
+   * @param result
+   */
+  public void intersection(ListNode first, ListNode second, LinkedList result) {
+    if (first == null || second == null) {
+      return;
+    }
+    if (first.data < second.data) {
+      intersection(first.next, second, result);
+    } else if (first.data > second.data) {
+      intersection(first, second.next, result);
+    } else {
+      result.insert(first.data);
+      intersection(first.next, second.next, result);
+    }
+  }
+
+  /**
+   * Union of two sorted linked lists
+   * 
+   * @param first
+   * @param second
+   * @param result
+   */
+  public void union(ListNode first, ListNode second, LinkedList result) {
+    if (first == null && second == null) {
+      return;
+    }
+    if (first != null && second == null) {
+      result.insert(first.data);
+      union(first.next, second, result);
+    } else if (first == null && second != null) {
+      result.insert(second.data);
+      union(first, second.next, result);
+    } else {
+      if (first.data < second.data) {
+        result.insert(first.data);
+        union(first.next, second, result);
+      } else if (first.data > second.data) {
+        result.insert(second.data);
+        union(first, second.next, result);
+      } else {
+        // If both values are same
+        result.insert(first.data);
+        union(first.next, second.next, result);
+      }
+    }
+  }
+
 }
