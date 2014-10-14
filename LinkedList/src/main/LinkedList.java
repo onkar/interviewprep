@@ -33,15 +33,6 @@ public class LinkedList {
     }
   }
 
-  public void print() {
-    ListNode temp = head;
-    while (temp != null) {
-      System.out.print(temp.data + " ");
-      temp = temp.next;
-    }
-    System.out.println("");
-  }
-
   public void delete(ListNode node) {
     if (isEmpty()) {
       return;
@@ -204,7 +195,7 @@ public class LinkedList {
       firstCurrent = firstNext;
       secondCurrent = secondNext;
     }
-    
+
     if (firstCurrent.next == null && secondCurrent.next != null) {
       // Second list is longer, so assign next of first list's last node to second list
       firstCurrent.next = secondCurrent;
