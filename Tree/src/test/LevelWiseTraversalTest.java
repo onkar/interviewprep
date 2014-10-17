@@ -56,4 +56,45 @@ public class LevelWiseTraversalTest {
     Assert.assertEquals(9, list.get(7).intValue());
   }
 
+  @Test
+  public void testRecursive() {
+    List<Integer> list = lwt.levelWiseRecursive();
+    Assert.assertEquals(12, list.get(0).intValue());
+    Assert.assertEquals(5, list.get(1).intValue());
+    Assert.assertEquals(15, list.get(2).intValue());
+    Assert.assertEquals(3, list.get(3).intValue());
+    Assert.assertEquals(7, list.get(4).intValue());
+    Assert.assertEquals(13, list.get(5).intValue());
+    Assert.assertEquals(17, list.get(6).intValue());
+    Assert.assertEquals(1, list.get(7).intValue());
+    Assert.assertEquals(9, list.get(8).intValue());
+  }
+
+  @Test
+  public void testReverseLevelWise() {
+    List<Integer> list = lwt.reverseLevelWise();
+    Assert.assertEquals(1, list.get(0).intValue());
+    Assert.assertEquals(9, list.get(1).intValue());
+    Assert.assertEquals(3, list.get(2).intValue());
+    Assert.assertEquals(7, list.get(3).intValue());
+    Assert.assertEquals(13, list.get(4).intValue());
+    Assert.assertEquals(17, list.get(5).intValue());
+    Assert.assertEquals(5, list.get(6).intValue());
+    Assert.assertEquals(15, list.get(7).intValue());
+    Assert.assertEquals(12, list.get(8).intValue());
+  }
+
+  @Test
+  public void testSpiralLevelWise() {
+    List<Integer> list = lwt.spiralLevelWise();
+    Assert.assertEquals(12, list.get(0).intValue());
+    Assert.assertEquals(5, list.get(1).intValue());
+    Assert.assertEquals(15, list.get(2).intValue());
+    Assert.assertEquals(17, list.get(3).intValue());
+    Assert.assertEquals(13, list.get(4).intValue());
+    Assert.assertEquals(7, list.get(5).intValue());
+    Assert.assertEquals(3, list.get(6).intValue());
+    Assert.assertEquals(1, list.get(7).intValue());
+    Assert.assertEquals(9, list.get(8).intValue());
+  }
 }
