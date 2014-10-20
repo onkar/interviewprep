@@ -6,7 +6,7 @@ import main.BinaryTreeFromPreorderAndPostorder;
 
 import org.junit.Test;
 
-public class BSTFromPreorderAndPostorderTest {
+public class BinaryTreeFromPreorderAndPostorderTest {
   private BinaryTreeFromPreorderAndPostorder pp;
 
   @Test
