@@ -197,4 +197,12 @@ public class BinarySearchTree {
       }
     }
   }
+
+  public int getCount(BSTNode root) {
+    if (root == null) {
+      return 0;
+    } else {
+      return 1 + getCount(root.left) + getCount(root.right);
+    }
+  }
 }
