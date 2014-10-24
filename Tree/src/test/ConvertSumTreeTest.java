@@ -1,14 +1,14 @@
 package test;
 
-import junit.framework.Assert;
 import main.BinarySearchTree;
 import main.BinarySearchTree.BSTNode;
-import main.SumTree;
+import main.ConvertSumTree;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SumTreeTest {
+public class ConvertSumTreeTest {
   private BinarySearchTree bst;
 
   @Before
@@ -27,7 +27,7 @@ public class SumTreeTest {
 
   @Test
   public void test() {
-    SumTree st = new SumTree(bst.root());
+    ConvertSumTree st = new ConvertSumTree(bst.root());
     BSTNode newRoot = st.convertToSumTree();
     Assert.assertEquals(82, newRoot.data);
     Assert.assertEquals(25, newRoot.left.data);

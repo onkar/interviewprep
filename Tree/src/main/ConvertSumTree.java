@@ -9,10 +9,10 @@ import main.BinarySearchTree.BSTNode;
  * @author onkar.deshpande@gmail.com (Onkar Deshpande)
  * 
  */
-public class SumTree {
+public class ConvertSumTree {
   private final BSTNode root;
 
-  public SumTree(BSTNode root) {
+  public ConvertSumTree(BSTNode root) {
     this.root = root;
   }
 
