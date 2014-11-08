@@ -17,16 +17,45 @@ public class LowestCommonAncestor {
    * @param q
    * @return
    */
-  public BSTNode findLCA(BSTNode root, BSTNode p, BSTNode q) {
+  public BSTNode findLCAOfBinaryTree(BSTNode root, BSTNode p, BSTNode q) {
     if (root == null)
       return null;
     if (root == p || root == q)
       return root;
-    BSTNode left = findLCA(root.left, p, q);
-    BSTNode right = findLCA(root.right, p, q);
+    BSTNode left = findLCAOfBinaryTree(root.left, p, q);
+    BSTNode right = findLCAOfBinaryTree(root.right, p, q);
     if (left != null && right != null)
       return root;
     return (left != null) ? left : right;
   }
 
+  /**
+   * Need to handle these 4 cases -
+   * 
+   * <pre>
+   * 1. Both nodes are to the left of the tree. 
+   * 2. Both nodes are to the right of the tree. 
+   * 3. One node is on the left while the other is on the right.
+   * 4. When the current node equals to either of the two nodes, this node must be the LCA too.
+   * </pre>
+   * 
+   * @param root
+   * @param p
+   * @param q
+   * @return
+   */
+  public BSTNode findLCAOfBinarySearchTree(BSTNode root, BSTNode p, BSTNode q) {
+    if (root == null) {
+      return null;
+    }
+    if (p == null || q == null) {
+      return null;
+    }
+    if (Math.max(p.data, q.data) < root.data)
+      return findLCAOfBinarySearchTree(root.left, p, q);
+    else if (Math.min(p.data, q.data) > root.data)
+      return findLCAOfBinarySearchTree(root.right, p, q);
+    else
+      return root;
+  }
 }
