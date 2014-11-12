@@ -1,9 +1,9 @@
 package test;
 
-import junit.framework.Assert;
 import main.BalancedBinaryTree;
 import main.BinarySearchTree.BSTNode;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BalancedBinaryTreeTest {
@@ -18,6 +18,7 @@ public class BalancedBinaryTreeTest {
     root.left.left.left = new BSTNode(7);
     BalancedBinaryTree bbt = new BalancedBinaryTree();
     Assert.assertTrue(bbt.isBalanced(root));
+    Assert.assertTrue(bbt.isBalancedBetter(root));
   }
 
 }
