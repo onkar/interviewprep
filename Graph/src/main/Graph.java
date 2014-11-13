@@ -122,4 +122,8 @@ public class Graph {
     // Return result
     return result;
   }
+
+  public int size() {
+    return adjacencyList.size();
+  }
 }
