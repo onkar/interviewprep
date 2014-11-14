@@ -11,10 +11,10 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
-public class Graph {
+public class DirectedGraph {
   private final Map<Integer, Set<Integer>> adjacencyList;
 
-  public Graph(int vertices) {
+  public DirectedGraph(int vertices) {
     adjacencyList = new HashMap<Integer, Set<Integer>>();
     for (int i = 0; i < vertices; i++) {
       adjacencyList.put(i, new HashSet<Integer>());
@@ -27,23 +27,12 @@ public class Graph {
       Set<Integer> adjacentNodes = adjacencyList.get(source);
       adjacentNodes.add(destination);
       adjacencyList.put(source, adjacentNodes);
-
-      // Update destination node's adjacency list with source
-      Set<Integer> revAdjacentNodes = adjacencyList.get(destination);
-      revAdjacentNodes.add(source);
-      adjacencyList.put(destination, revAdjacentNodes);
     }
   }
 
   public void addEdges(int source, Set<Integer> nodes) {
-    if (adjacencyList.containsKey(source)) {
-      for (int i : nodes) {
-        if (!adjacencyList.containsKey(i)) {
-          break;
-        } else {
-          addEdge(source, i);
-        }
-      }
+    for (int i : nodes) {
+      addEdge(source, i);
     }
   }
 
@@ -52,20 +41,11 @@ public class Graph {
   }
 
   public List<Integer> bfs(int start) {
-    // Create a queue and add start element in it.
     Queue<Integer> queue = new LinkedList<Integer>();
     queue.add(start);
-
-    // Create visited boolean array and set start index to true since start node is visited.
     boolean[] visited = new boolean[adjacencyList.size()];
     visited[start] = true;
-
-    // result contains the output BFS traversal
     List<Integer> result = new ArrayList<Integer>();
-
-    // Remove the element from the queue and put it in the output sequence. Then for each adjacent
-    // node of the element, check if it's visited. If it's not, make it visited and add it in the
-    // queue. Keep doing this until the queue is not empty.
     while (!queue.isEmpty()) {
       int node = queue.remove();
       result.add(node);
@@ -76,54 +56,65 @@ public class Graph {
         }
       }
     }
-    // Return BFS traversal
     return result;
   }
 
   public List<Integer> dfs(int start) {
-    // Create a stack, result list and visited array
     Stack<Integer> stack = new Stack<Integer>();
     List<Integer> result = new ArrayList<Integer>();
     boolean[] visited = new boolean[adjacencyList.size()];
 
-    // Push the start element to the stack, add it to the output sequence, and mark it as visited.
     stack.push(start);
-    result.add(start);
     visited[start] = true;
+    result.add(start);
 
     while (!stack.isEmpty()) {
-      // Check the top element in the stack and get its adjacent nodes
       int node = stack.peek();
       Set<Integer> adjacentNodes = getAdjacentNodes(node);
-
-      // Get an iterator to the set.
       Iterator<Integer> itr = adjacentNodes.iterator();
       if (itr.hasNext()) {
-        // If it is a valid iterator (i.e. the adjacent node exists), dereference it to an integer
-        // and remove it so that next element will be the next adjacent node. NOTE : Unlike BFS,
-        // don't do a for each loop on adjacent nodes.
         int adjNode = itr.next();
         itr.remove();
-
-        // If this adjacent node is not visited, push it to the stack, add it to the output sequence
-        // and mark it as visited.
         if (!visited[adjNode]) {
           stack.push(adjNode);
           result.add(adjNode);
           visited[adjNode] = true;
+        } else {
+          stack.pop();
         }
-      } else {
-        // If it is an invalid iterator (i.e. adjacent node doesn't exist), pop element from the
-        // stack.
-        stack.pop();
       }
     }
-
-    // Return result
     return result;
   }
 
-  public int size() {
-    return adjacencyList.size();
+  public boolean isCyclic() {
+    Stack<Integer> stack = new Stack<Integer>();
+    boolean[] visited = new boolean[adjacencyList.size()];
+    int start = 0;
+    stack.push(start);
+    visited[start] = true;
+    boolean cyclic = false;
+    while (!stack.isEmpty()) {
+      int node = stack.peek();
+      Set<Integer> adjacentNodes = getAdjacentNodes(node);
+      Iterator<Integer> it = adjacentNodes.iterator();
+      if (it.hasNext()) {
+        // There are adjacent nodes present
+        int adjNode = it.next();
+        it.remove();
+        if (!visited[adjNode]) {
+          visited[adjNode] = true;
+          stack.push(adjNode);
+        } else {
+          // If we are visiting already visited nodes, then there is a cycle
+          cyclic = true;
+          break;
+        }
+      } else {
+        // Pop the stack if there are no adjacent nodes
+        stack.pop();
+      }
+    }
+    return cyclic;
   }
 }

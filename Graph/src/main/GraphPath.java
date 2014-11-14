@@ -11,7 +11,7 @@ import java.util.Queue;
  */
 public class GraphPath {
 
-  public boolean search(Graph g, int start, int end) {
+  public boolean search(UndirectedGraph g, int start, int end) {
     Queue<Integer> queue = new LinkedList<Integer>();
     queue.add(start);
     boolean[] visited = new boolean[g.size()];
