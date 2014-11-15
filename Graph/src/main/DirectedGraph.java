@@ -117,4 +117,8 @@ public class DirectedGraph {
     }
     return cyclic;
   }
+
+  public int size() {
+    return adjacencyList.size();
+  }
 }
