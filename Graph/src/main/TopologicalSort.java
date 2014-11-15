@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Topological sort only works on acyclic digraphs
+ * Topological sort only works on acyclic digraphs.
+ * 
+ * <pre>
+ * Details - https://www.youtube.com/watch?v=jksMzq4LgfM
+ * </pre>
  * 
  * @author onkar.deshpande@gmail.com (Onkar Deshpande)
  *
