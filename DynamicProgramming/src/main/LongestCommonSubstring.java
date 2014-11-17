@@ -5,7 +5,7 @@ package main;
  * the given strings are “GeeksforGeeks” and “GeeksQuiz”, the output should be 5 as longest common
  * substring is “Geeks”
  * 
- * @author tejatamboli
+ * @author onkar.deshpande@gmail.com (Onkar Deshpande)
  *
  */
 public class LongestCommonSubstring {
