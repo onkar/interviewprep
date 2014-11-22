@@ -1,6 +1,7 @@
 package main;
 
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -11,19 +12,19 @@ import java.util.Queue;
  */
 public class GraphPath {
 
-  public boolean search(UndirectedGraph g, int start, int end) {
-    Queue<Integer> queue = new LinkedList<Integer>();
+  public static boolean search(Map<Integer, Node> undirectedGraph, Node start, Node end) {
+    Queue<Node> queue = new LinkedList<Node>();
     queue.add(start);
-    boolean[] visited = new boolean[g.size()];
-    visited[start] = true;
+    boolean[] visited = new boolean[undirectedGraph.size()];
+    visited[start.label] = true;
     while (!queue.isEmpty()) {
-      int node = queue.remove();
-      for (int adjNode : g.getAdjacentNodes(node)) {
-        if (!visited[adjNode]) {
+      Node node = queue.remove();
+      for (Node adjNode : node.neighbors) {
+        if (!visited[adjNode.label]) {
           if (adjNode == end) {
             return true;
           } else {
-            visited[adjNode] = true;
+            visited[adjNode.label] = true;
             queue.add(adjNode);
           }
         }

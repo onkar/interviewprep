@@ -1,61 +1,134 @@
 package test;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import main.UndirectedGraph;
+import main.Node;
+import main.UndirectedGraphOperations;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class UndirectedGraphTest {
+
   @Test
   public void testBFS() {
-    UndirectedGraph g = new UndirectedGraph(9);
-    g.addEdge(0, 1);
-    g.addEdge(0, 8);
-    g.addEdge(8, 2);
-    g.addEdge(8, 6);
-    g.addEdge(2, 3);
-    g.addEdge(2, 4);
-    g.addEdge(2, 5);
-    g.addEdge(6, 5);
-    g.addEdge(6, 7);
-    g.addEdge(7, 4);
+    Node zero = new Node(0);
+    Node one = new Node(1);
+    Node two = new Node(2);
+    Node three = new Node(3);
+    Node four = new Node(4);
+    Node five = new Node(5);
+    Node six = new Node(6);
+    Node seven = new Node(7);
+    Node eight = new Node(8);
 
-    List<Integer> result = g.bfs(0);
-    Assert.assertEquals(0, result.get(0).intValue());
-    Assert.assertEquals(1, result.get(1).intValue());
-    Assert.assertEquals(8, result.get(2).intValue());
-    Assert.assertEquals(2, result.get(3).intValue());
-    Assert.assertEquals(6, result.get(4).intValue());
-    Assert.assertEquals(3, result.get(5).intValue());
-    Assert.assertEquals(4, result.get(6).intValue());
-    Assert.assertEquals(5, result.get(7).intValue());
-    Assert.assertEquals(7, result.get(8).intValue());
+    zero.neighbors.add(one);
+    zero.neighbors.add(eight);
+    one.neighbors.add(zero);
+    two.neighbors.add(three);
+    two.neighbors.add(four);
+    two.neighbors.add(five);
+    two.neighbors.add(eight);
+    three.neighbors.add(two);
+    four.neighbors.add(two);
+    four.neighbors.add(seven);
+    five.neighbors.add(two);
+    five.neighbors.add(six);
+    six.neighbors.add(five);
+    six.neighbors.add(seven);
+    six.neighbors.add(eight);
+    seven.neighbors.add(four);
+    seven.neighbors.add(six);
+    eight.neighbors.add(two);
+    eight.neighbors.add(six);
+    eight.neighbors.add(zero);
+
+    Map<Integer, Node> undirectedGraph = new HashMap<Integer, Node>();
+    undirectedGraph.put(0, zero);
+    undirectedGraph.put(1, one);
+    undirectedGraph.put(2, two);
+    undirectedGraph.put(3, three);
+    undirectedGraph.put(4, four);
+    undirectedGraph.put(5, five);
+    undirectedGraph.put(6, six);
+    undirectedGraph.put(7, seven);
+    undirectedGraph.put(8, eight);
+
+    System.out.println("Graph is :");
+    printGraph(undirectedGraph);
+
+    System.out.println("BFS is :");
+    for (Node n : UndirectedGraphOperations.bfs(undirectedGraph, zero)) {
+      System.out.print(n.label + " ");
+    }
+    System.out.println();
+  }
+
+  private void printGraph(Map<Integer, Node> undirectedGraph) {
+    for (Entry<Integer, Node> e : undirectedGraph.entrySet()) {
+      int key = e.getKey();
+      Node value = e.getValue();
+      System.out.print(key + "=> ");
+      for (Node u : value.neighbors) {
+        System.out.print(u.label + " ");
+      }
+      System.out.println();
+    }
   }
 
   @Test
   public void testDFS() {
-    UndirectedGraph g = new UndirectedGraph(9);
-    g.addEdge(0, 1);
-    g.addEdge(0, 8);
-    g.addEdge(8, 2);
-    g.addEdge(8, 6);
-    g.addEdge(2, 3);
-    g.addEdge(2, 4);
-    g.addEdge(2, 5);
-    g.addEdge(6, 5);
-    g.addEdge(6, 7);
-    g.addEdge(7, 4);
-    List<Integer> result = g.dfs(0);
-    Assert.assertEquals(0, result.get(0).intValue());
-    Assert.assertEquals(1, result.get(1).intValue());
-    Assert.assertEquals(8, result.get(2).intValue());
-    Assert.assertEquals(2, result.get(3).intValue());
-    Assert.assertEquals(3, result.get(4).intValue());
-    Assert.assertEquals(4, result.get(5).intValue());
-    Assert.assertEquals(7, result.get(6).intValue());
-    Assert.assertEquals(6, result.get(7).intValue());
-    Assert.assertEquals(5, result.get(8).intValue());
+    Node zero = new Node(0);
+    Node one = new Node(1);
+    Node two = new Node(2);
+    Node three = new Node(3);
+    Node four = new Node(4);
+    Node five = new Node(5);
+    Node six = new Node(6);
+    Node seven = new Node(7);
+    Node eight = new Node(8);
+
+    zero.neighbors.add(one);
+    zero.neighbors.add(eight);
+    one.neighbors.add(zero);
+    two.neighbors.add(three);
+    two.neighbors.add(four);
+    two.neighbors.add(five);
+    two.neighbors.add(eight);
+    three.neighbors.add(two);
+    four.neighbors.add(two);
+    four.neighbors.add(seven);
+    five.neighbors.add(two);
+    five.neighbors.add(six);
+    six.neighbors.add(five);
+    six.neighbors.add(seven);
+    six.neighbors.add(eight);
+    seven.neighbors.add(four);
+    seven.neighbors.add(six);
+    eight.neighbors.add(two);
+    eight.neighbors.add(six);
+    eight.neighbors.add(zero);
+
+    Map<Integer, Node> undirectedGraph = new HashMap<Integer, Node>();
+    undirectedGraph.put(0, zero);
+    undirectedGraph.put(1, one);
+    undirectedGraph.put(2, two);
+    undirectedGraph.put(3, three);
+    undirectedGraph.put(4, four);
+    undirectedGraph.put(5, five);
+    undirectedGraph.put(6, six);
+    undirectedGraph.put(7, seven);
+    undirectedGraph.put(8, eight);
+
+    System.out.println("Graph is :");
+    printGraph(undirectedGraph);
+
+    System.out.println("DFS is :");
+    for (Node n : UndirectedGraphOperations.dfs(undirectedGraph, zero)) {
+      System.out.print(n.label + " ");
+    }
+    System.out.println();
+
   }
 }

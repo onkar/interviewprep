@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
@@ -16,36 +18,37 @@ import java.util.Stack;
  */
 public class TopologicalSort {
   private final boolean[] visited;
-  private final Stack<Integer> stack;
+  private final Stack<Node> stack;
 
-  public TopologicalSort(DirectedGraph g) {
-    visited = new boolean[g.size()];
-    stack = new Stack<Integer>();
+  public TopologicalSort(Map<Integer, Node> directedGraph) {
+    visited = new boolean[directedGraph.size()];
+    stack = new Stack<Node>();
   }
 
-  public List<Integer> sort(DirectedGraph dg) {
-    for (int v = 0; v < dg.size(); v++) {
-      // Go through all the nodes and call dfs if they are not visited
-      if (!visited[v])
-        dfs(dg, v);
+  public List<Node> sort(Map<Integer, Node> directedGraph) {
+    for (Entry<Integer, Node> entry : directedGraph.entrySet()) {
+      if (!visited[entry.getValue().label]) {
+        dfs(entry.getValue());
+      }
     }
+
     // After dfs, the stack should contain the reverse ordered dependency sequence of nodes (least
     // dependent node on top and max dependent at the bottom). So convert it to a list and return it
-    List<Integer> result = new ArrayList<Integer>();
+    List<Node> result = new ArrayList<Node>();
     while (!stack.isEmpty()) {
       result.add(stack.pop());
     }
     return result;
   }
 
-  private void dfs(DirectedGraph dg, int v) {
+  private void dfs(Node node) {
     // Set visited of the current node to true, call dfs for all adjacent nodes of the current node
     // and push the current node to stack
-    visited[v] = true;
-    for (int adjNode : dg.getAdjacentNodes(v)) {
-      if (!visited[adjNode])
-        dfs(dg, adjNode);
+    visited[node.label] = true;
+    for (Node adjNode : node.neighbors) {
+      if (!visited[adjNode.label])
+        dfs(adjNode);
     }
-    stack.push(v);
+    stack.push(node);
   }
 }

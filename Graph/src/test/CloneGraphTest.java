@@ -1,16 +1,14 @@
 package test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import main.CloneGraph;
 import main.Node;
-import main.TopologicalSort;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class TopologicalSortTest {
+public class CloneGraphTest {
   @Test
   public void test() {
     Node zero = new Node(0);
@@ -42,14 +40,6 @@ public class TopologicalSortTest {
     directedGraph.put(5, five);
     directedGraph.put(6, six);
 
-    TopologicalSort ts = new TopologicalSort(directedGraph);
-    List<Node> result = ts.sort(directedGraph);
-    Assert.assertEquals(3, result.get(0).label);
-    Assert.assertEquals(6, result.get(1).label);
-    Assert.assertEquals(0, result.get(2).label);
-    Assert.assertEquals(5, result.get(3).label);
-    Assert.assertEquals(2, result.get(4).label);
-    Assert.assertEquals(1, result.get(5).label);
-    Assert.assertEquals(4, result.get(6).label);
+    CloneGraph.cloneGraphDFS(directedGraph);
   }
 }
