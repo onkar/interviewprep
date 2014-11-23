@@ -30,4 +30,21 @@ public class Interleaving {
       interleavingRec(s1, s2.substring(1), result + s2.charAt(0));
     }
   }
+
+  public boolean areInterleaved(String s1, int s1Index, String s2, int s2Index, String s3,
+      int s3Index) {
+    if (s3Index == s3.length() - 1)
+      return true;
+    if (s1.charAt(s1Index) != s3.charAt(s3Index) && s2.charAt(s2Index) != s3.charAt(s3Index))
+      return false;
+    if (s1.charAt(s1Index) == s3.charAt(s3Index)) {
+      if (areInterleaved(s1, ++s1Index, s2, s2Index, s3, ++s3Index))
+        return true;
+    }
+    if (s2.charAt(s2Index) == s3.charAt(s3Index)) {
+      if (areInterleaved(s1, s1Index, s2, ++s2Index, s3, ++s3Index))
+        return true;
+    }
+    return false;
+  }
 }
