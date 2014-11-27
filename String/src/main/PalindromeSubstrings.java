@@ -15,18 +15,43 @@ public class PalindromeSubstrings {
     Set<String> result = new HashSet<String>();
     for (int i = 0; i < str.length(); i++) {
       // Expand even palindromes
-      expandPalindroms(result, str, i, i + 1);
+      expandPalindromes(result, str, i, i + 1);
       // Expand odd palindromes
-      expandPalindroms(result, str, i, i);
+      expandPalindromes(result, str, i, i);
     }
     return result;
   }
 
-  private void expandPalindroms(Set<String> result, String str, int i, int j) {
+  private void expandPalindromes(Set<String> result, String str, int i, int j) {
     while (i >= 0 && j < str.length() && str.charAt(i) == str.charAt(j)) {
       result.add(str.substring(i, j + 1));
       i--;
       j++;
     }
+  }
+
+  public String longestPalindromicSubstring(String str) {
+    if (str.length() == 0)
+      return "";
+    String longestPalindrome = str.substring(0, 1);
+    for (int i = 0; i < str.length() - 1; i++) {
+      String temp = expandPalindromes(str, i, i + 1);
+      if (temp.length() > longestPalindrome.length())
+        longestPalindrome = temp;
+      temp = expandPalindromes(str, i, i);
+      if (temp.length() > longestPalindrome.length())
+        longestPalindrome = temp;
+    }
+    return longestPalindrome;
+  }
+
+  private String expandPalindromes(String str, int begin, int end) {
+    // Note the end <= str.length() - 1 condition
+    while (begin >= 0 && end <= str.length() - 1 && str.charAt(begin) == str.charAt(end)) {
+      begin--;
+      end++;
+    }
+    // Note the begin + 1 because after while loop begin = -1 and end = str.length() - 1
+    return str.substring(begin + 1, end);
   }
 }
