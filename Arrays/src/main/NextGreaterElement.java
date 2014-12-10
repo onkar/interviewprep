@@ -36,20 +36,11 @@ public class NextGreaterElement {
     int[] result = new int[array.length];
 
     for (int i = 1; i < array.length; i++) {
-      if (!stack.isEmpty()) {
-        IndexAndElement indexAndElement = stack.pop();
-        while (indexAndElement.element < array[i]) {
-          // While popped element is less that current element in the array, update the result array
-          result[indexAndElement.index] = array[i];
-          if (stack.isEmpty()) {
-            break;
-          }
-          indexAndElement = stack.pop();
-        }
-        // If popped element is greater than current element of array, push it back in the stack
-        if (indexAndElement.element > array[i]) {
-          stack.push(indexAndElement);
-        }
+      while (!stack.isEmpty() && stack.peek().element < array[i]) {
+        // While stack's top is less that current element in the array, update the result array and
+        // pop the element
+        result[stack.peek().index] = array[i];
+        stack.pop();
       }
       // Push the current element in the stack
       IndexAndElement newIndexAndElement = new IndexAndElement();
