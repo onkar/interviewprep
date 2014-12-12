@@ -2,7 +2,9 @@ package main;
 
 /**
  * Given strings SUNDAY and SATURDAY. We want to convert SUNDAY into SATURDAY with minimum edits.
- * Source - https://www.youtube.com/watch?v=iYa9AqB3wPc
+ * Source -
+ * http://programming4interviews.wordpress.com/2011/07/07/edit-distance-of-2-strings-using-dynamic
+ * -programming/
  * 
  * @author onkar.deshpande@gmail.com (Onkar Deshpande)
  * 
@@ -11,16 +13,15 @@ public class EditDistance {
   /**
    * <pre>
    * 
-   *                |---- E(i - 1, j - 1) + diff (i, j)
+   *                                           ____ 0 if (x.charAt(i - 1) == y.charAt(j - 1)
+   *                                          |
+   *                |---- E(i - 1, j - 1) + --
+   *                |                         |____ 1 if (x.charAt(i - 1) != y.charAt(j - 1)
    *                |
    * E(i, j) = min  |
    *                |---- E(i - 1, j) + 1
    *                |
    *                |---- E(i, j - 1) + 1
-   * where 
-   *                |--- 1 if x(i) != y(j) 
-   * diff (i, j) =  | 
-   *                |--- 0 if x(i) == y(j)
    * </pre>
    * 
    * @param x
@@ -28,19 +29,28 @@ public class EditDistance {
    * @return
    */
   public int getMinEdits(String x, String y) {
-    int cols = x.length();
-    int rows = y.length();
+    int rows = x.length();
+    int cols = y.length();
     int[][] E = new int[rows + 1][cols + 1];
-    for (int i = 0; i < cols + 1; i++) {
-      E[0][i] = i;
+    for (int i = 0; i <= rows; i++) {
+      E[i][0] = i;
     }
-    for (int j = 0; j < rows + 1; j++) {
-      E[j][0] = j;
+    for (int j = 0; j <= cols; j++) {
+      E[0][j] = j;
     }
-    for (int i = 1; i < rows + 1; i++) {
-      for (int j = 1; j < cols + 1; j++) {
-        E[i][j] =
-            minimum(E[i - 1][j - 1] + diff(j - 1, i - 1, x, y), E[i - 1][j] + 1, E[i][j - 1] + 1);
+    for (int i = 1; i <= rows; i++) {
+      for (int j = 1; j <= cols; j++) {
+        // NOTE : i-1 and j-1 indexes are checked because we want to make sure the string are in
+        // the bounds. For i = 1 and j = 1, we want to check from the beginning so we are checking
+        // i-1 and j-1th index
+        if (x.charAt(i - 1) == y.charAt(j - 1)) {
+          // If both characters match then there is no need to insert / delete / replace. So keep
+          // the same edit distance as previous
+          E[i][j] = E[i - 1][j - 1];
+        } else {
+          // Otherwise, get the minimum of insert / delete / replace
+          E[i][j] = minimum(E[i - 1][j - 1] + 1, E[i][j - 1] + 1, E[i - 1][j] + 1);
+        }
       }
     }
     return E[rows][cols];
@@ -48,9 +58,5 @@ public class EditDistance {
 
   private int minimum(int i, int j, int k) {
     return Math.min(i, Math.min(j, k));
-  }
-
-  private int diff(int i, int j, String x, String y) {
-    return x.charAt(i) != y.charAt(j) ? 1 : 0;
   }
 }
