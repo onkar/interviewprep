@@ -27,7 +27,7 @@ public class MaxProductSubarray {
     int[] min = new int[array.length];
     int[] max = new int[array.length];
     max[0] = array[0];
-    max[1] = array[0];
+    min[1] = array[0];
     for (int i = 1; i < array.length; i++) {
       max[i] = getMax(array[i], max[i - 1] * array[i], min[i - 1] * array[i]);
       min[i] = getMin(array[i], max[i - 1] * array[i], min[i - 1] * array[i]);
