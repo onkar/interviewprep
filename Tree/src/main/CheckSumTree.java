@@ -50,7 +50,9 @@ public class CheckSumTree {
         // If the left child is a leaf node, leftSum is the data of the left child
         leftSum = root.left.data;
       } else {
-        // If the leaf child is a non-leaf node, leftSum is twice the data of the left child
+        // If the left child is a non-leaf node, leftSum is twice the data of the left child. If
+        // this tree is a sum tree, this assumption will be true. Check the node with value 45 in
+        // the above diagram.
         leftSum = 2 * root.left.data;
       }
 
