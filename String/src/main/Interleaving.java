@@ -5,7 +5,7 @@ package main;
  * Input: str1 = "AB", str2 = "CD"
  * Output: ABCD, ACBD, ACDB, CABD, CADB, CDAB An interleaved string
  * of given two strings preserves the order of characters in individual strings. For example, in all
- * the interleavings of above first example, ÔAÕ comes before ÔBÕ and ÔCÕ comes before ÔDÕ. -
+ * the interleaving of above first example, A comes before B and C comes before D. -
  * https://www.youtube.com/watch?v=jspbN5bNPqM
  * </pre>
  * 
