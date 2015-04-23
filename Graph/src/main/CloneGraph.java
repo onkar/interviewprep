@@ -17,7 +17,7 @@ public class CloneGraph {
     while (it.hasNext()) {
       Node currentNode = it.next();
       Map<Node, Node> visitedMap = new HashMap<Node, Node>();
-      Node currentClonedNode = DFSCopy(currentNode, visitedMap);
+      Node currentClonedNode = dfsCopy(currentNode, visitedMap);
       result.put(currentClonedNode.label, currentClonedNode);
     }
 
@@ -39,14 +39,14 @@ public class CloneGraph {
     }
   }
 
-  private static Node DFSCopy(Node node, Map<Node, Node> map) {
+  private static Node dfsCopy(Node node, Map<Node, Node> map) {
     if (map.containsKey(node)) {
       return map.get(node);
     }
     Node copy = new Node(node.label);
     map.put(node, copy);
     for (int i = 0; i < node.neighbors.size(); i++) {
-      copy.neighbors.add(DFSCopy(node.neighbors.get(i), map));
+      copy.neighbors.add(dfsCopy(node.neighbors.get(i), map));
     }
     return copy;
   }
