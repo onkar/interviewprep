@@ -97,4 +97,9 @@ public class LevelWiseTraversalTest {
     Assert.assertEquals(1, list.get(7).intValue());
     Assert.assertEquals(9, list.get(8).intValue());
   }
+
+  @Test
+  public void testEachLevelOnNewline() {
+    lwt.printEachLevelOnNewline();
+  }
 }

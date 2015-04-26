@@ -138,4 +138,27 @@ public class LevelWiseTraversal {
     }
     return l;
   }
+
+  public void printEachLevelOnNewline() {
+    Queue<BSTNode> queue = new LinkedList<BSTNode>();
+    int nodesInCurrentLevel = 1;
+    int nodesInNextLevel = 0;
+    queue.add(root);
+    while (!queue.isEmpty()) {
+      BSTNode node = queue.remove();
+      --nodesInCurrentLevel;
+      if (node != null) {
+        System.out.print(node.data + " ");
+        queue.add(node.left);
+        queue.add(node.right);
+        nodesInNextLevel += 2;
+      }
+
+      if (nodesInCurrentLevel == 0) {
+        System.out.println("");
+        nodesInCurrentLevel = nodesInNextLevel;
+        nodesInNextLevel = 0;
+      }
+    }
+  }
 }
