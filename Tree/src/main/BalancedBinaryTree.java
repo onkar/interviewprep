@@ -55,7 +55,7 @@ public class BalancedBinaryTree {
       return -1; // Not balanced
     } else {
       // Return whichever (left or right) height is maximum
-      return Math.max(leftHeight, rightHeight);
+      return Math.max(leftHeight, rightHeight) + 1;
     }
   }
 
