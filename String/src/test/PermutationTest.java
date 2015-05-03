@@ -7,9 +7,11 @@ import org.junit.Test;
 public class PermutationTest {
   @Test
   public void test() {
-    Permutations p = new Permutations();
-    p.printPermutationsInOrder("abc");
+    Permutations.printPermutationsInOrder("abc");
     System.out.println();
-    p.printPermutationsNotInOrder("abc");
+    Permutations.printPermutationsNotInOrder("abc");
+    System.out.println();
+    Permutations p = new Permutations("abc");
+    p.permute();
   }
 }

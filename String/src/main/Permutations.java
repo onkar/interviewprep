@@ -1,7 +1,7 @@
 package main;
 
 public class Permutations {
-  public void printPermutationsInOrder(String str) {
+  public static void printPermutationsInOrder(String str) {
     permutationInOrder("", str);
   }
 
@@ -9,7 +9,7 @@ public class Permutations {
   // recursion. The base case is when input is an empty string, the only permutation is an empty
   // string.
   // Source - http://introcs.cs.princeton.edu/java/23recursion/Permutations.java.html
-  private void permutationInOrder(String prefix, String str) {
+  private static void permutationInOrder(String prefix, String str) {
     int n = str.length();
     if (n == 0)
       System.out.println(prefix);
@@ -17,7 +17,7 @@ public class Permutations {
       permutationInOrder(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, n));
   }
 
-  public void printPermutationsNotInOrder(String str) {
+  public static void printPermutationsNotInOrder(String str) {
     int length = str.length();
     char[] array = new char[length];
     for (int i = 0; i < length; i++) {
@@ -26,7 +26,7 @@ public class Permutations {
     permutationNotInOrder(array, length);
   }
 
-  private void permutationNotInOrder(char[] array, int length) {
+  private static void permutationNotInOrder(char[] array, int length) {
     if (length == 1) {
       System.out.println(array);
     }
@@ -37,9 +37,35 @@ public class Permutations {
     }
   }
 
-  private void swap(char[] array, int i, int j) {
+  private static void swap(char[] array, int i, int j) {
     char temp = array[i];
     array[i] = array[j];
     array[j] = temp;
+  }
+
+  // Another way of generating permutations
+  private boolean[] used;
+  private StringBuilder sb = new StringBuilder();
+  private String input;
+
+  public Permutations(String input) {
+    this.used = new boolean[input.length()];
+    this.input = input;
+  }
+
+  public void permute() {
+    if (sb.length() == input.length()) {
+      System.out.println(sb);
+      return;
+    }
+    for (int i = 0; i < input.length(); i++) {
+      if (used[i] == true)
+        continue;
+      sb.append(input.charAt(i));
+      used[i] = true;
+      permute();
+      used[i] = false;
+      sb.setLength(sb.length() - 1);
+    }
   }
 }
