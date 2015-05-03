@@ -22,11 +22,10 @@ public class JustifyText {
     StringBuilder sb = new StringBuilder();
     while (st.hasMoreTokens()) {
       sb.append(st.nextToken());
-      if (st.hasMoreTokens()) {
-        for (int i = 0; i < individualSpacing; i++) {
-          sb.append(" ");
-        }
+      for (int i = 0; i < individualSpacing; i++) {
+        sb.append(" ");
       }
+
       if (padding > 0) {
         sb.append(" ");
         --padding;
