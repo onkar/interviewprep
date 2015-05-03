@@ -18,6 +18,13 @@ public class NumberMatchingIndex {
     return no;
   }
 
+  /**
+   * This algorithm works only when all elements are distinct
+   * 
+   * @param low
+   * @param high
+   * @return
+   */
   private int findNumberMatchingIndexRec(int low, int high) {
     if (high < low) {
       return -1;
@@ -60,5 +67,40 @@ public class NumberMatchingIndex {
     } else {
       return -1;
     }
+  }
+
+  /**
+   * This algorithm works for non-distinct numbers also.
+   * 
+   * @return
+   */
+  public int findNumberMatchingIndexNonDistinct() {
+    return noMatchingIndexNonDistinct(0, array.length - 1);
+  }
+
+  private int noMatchingIndexNonDistinct(int low, int high) {
+    if (low < 0 || high >= array.length || high < low)
+      return -1;
+
+    int midIndex = (low + high) / 2;
+    int midValue = array[midIndex];
+    // If index and value match, return index
+    if (midValue == midIndex)
+      return midIndex;
+
+    // leftIndex is the minimum of midIndex - 1 and midValue
+    int leftIndex = Math.min(midIndex - 1, midValue);
+
+    // Call same function recursively for the range low to leftIndex
+    int left = noMatchingIndexNonDistinct(low, leftIndex);
+    if (left >= 0)
+      return left;
+
+    // rightIndex is the minimum of midIndex + 1 and midValue
+    int rightIndex = Math.min(midIndex + 1, midValue);
+
+    // Call same function recursively for right side
+    int right = noMatchingIndexNonDistinct(rightIndex, high);
+    return right;
   }
 }
