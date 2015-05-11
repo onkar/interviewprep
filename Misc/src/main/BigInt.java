@@ -10,7 +10,7 @@ public class BigInt {
       if (c < '0' || c > '9') {
         throw new IllegalArgumentException("Invalid digit " + c + " found at location " + i);
       }
-      result[i] = (byte) (c - '0');
+      result[i] = c - '0';
     }
     return result;
   }
