@@ -62,7 +62,7 @@ public class LinkedListTest {
     Assert.assertEquals(ll.head.next.next.data, 5);
     Assert.assertNull(ll.head.next.next.next);
   }
-  
+
   @Test
   public void testPairWiseSwapEvenNodes() {
     ll.pairWiseSwap();
@@ -97,7 +97,7 @@ public class LinkedListTest {
     Assert.assertEquals(ll.head.next.next.next.next.data, 4);
     Assert.assertEquals(ll.head.next.next.next.next.next.data, 2);
   }
-  
+
   @Test
   public void testReverseAlternateAndAppendOddNodes() {
     ll.insert(7);
@@ -116,7 +116,7 @@ public class LinkedListTest {
     LinkedList l2 = new LinkedList();
     l2.insert(10);
     l2.insert(11);
-    
+
     ll.mergeAlternate(l2);
     Assert.assertEquals(ll.head.data, 1);
     Assert.assertEquals(ll.head.next.data, 10);
@@ -225,6 +225,23 @@ public class LinkedListTest {
     Assert.assertEquals(5, result.head.next.next.next.next.data);
     Assert.assertEquals(6, result.head.next.next.next.next.next.data);
     Assert.assertEquals(7, result.head.next.next.next.next.next.next.data);
+  }
+
+  @Test
+  public void testReverseKElements() {
+    ll.insert(7);
+    ll.insert(8);
+    LinkedList result = new LinkedList();
+    result.head = result.reverseKElements(ll.head, 3);
+    Assert.assertEquals(3, result.head.data);
+    Assert.assertEquals(2, result.head.next.data);
+    Assert.assertEquals(1, result.head.next.next.data);
+    Assert.assertEquals(6, result.head.next.next.next.data);
+    Assert.assertEquals(5, result.head.next.next.next.next.data);
+    Assert.assertEquals(4, result.head.next.next.next.next.next.data);
+    Assert.assertEquals(8, result.head.next.next.next.next.next.next.data);
+    Assert.assertEquals(7, result.head.next.next.next.next.next.next.next.data);
+    Assert.assertNull(result.head.next.next.next.next.next.next.next.next);
   }
 
 }

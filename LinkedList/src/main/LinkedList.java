@@ -314,4 +314,23 @@ public class LinkedList {
     }
   }
 
+  public ListNode reverseKElements(ListNode head, int k) {
+    ListNode current = head;
+    ListNode prev = null;
+    ListNode next = null;
+    int count = 0;
+    while (current != null && count < k) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+      count++;
+    }
+
+    if (next != null)
+      head.next = reverseKElements(next, k);
+
+    return prev;
+  }
+
 }
