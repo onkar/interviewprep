@@ -1,7 +1,9 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Operations related to binary search tree.
@@ -204,5 +206,35 @@ public class BinarySearchTree {
     } else {
       return 1 + getCount(root.left) + getCount(root.right);
     }
+  }
+
+  public int getHeightIterative() {
+    Queue<BSTNode> queue = new LinkedList<BSTNode>();
+    int nodesInCurrentLevel = 1;
+    int nodesInNextLevel = 0;
+    int height = 0;
+    queue.add(root);
+
+    while (!queue.isEmpty()) {
+      BSTNode node = queue.remove();
+      --nodesInCurrentLevel;
+      if (node != null) {
+        if (node.left != null) {
+          queue.add(node.left);
+          nodesInNextLevel += 1;
+        }
+        if (node.right != null) {
+          queue.add(node.right);
+          nodesInNextLevel += 1;
+        }
+      }
+      if (nodesInCurrentLevel == 0) {
+        ++height;
+        nodesInCurrentLevel = nodesInNextLevel;
+        nodesInNextLevel = 0;
+      }
+    }
+
+    return height;
   }
 }

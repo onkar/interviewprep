@@ -86,6 +86,7 @@ public class BinarySearchTreeTest {
   @Test
   public void testHeight() {
     Assert.assertEquals(4, bst.getHeight());
+    Assert.assertEquals(4, bst.getHeightIterative());
   }
 
   @Test
