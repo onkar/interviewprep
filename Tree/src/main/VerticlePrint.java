@@ -10,7 +10,7 @@ import main.BinarySearchTree.BSTNode;
 /**
  * Print tree vertically
  * 
- * @author ttamboli
+ * @author onkar.deshpande@gmail.com (Onkar Deshpande)
  *
  */
 public class VerticlePrint {
