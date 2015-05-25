@@ -1,9 +1,9 @@
 package test;
 
-import junit.framework.Assert;
 import main.BinarySearchTree.BSTNode;
 import main.TreeMaxWidth;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TreeMaxWidthTest {
@@ -20,5 +20,6 @@ public class TreeMaxWidthTest {
     root.right.right.right = new BSTNode(7);
     TreeMaxWidth tmw = new TreeMaxWidth();
     Assert.assertEquals(3, tmw.getMaxWidth(root));
+    Assert.assertEquals(3, tmw.getMaxWidthIterative(root));
   }
 }

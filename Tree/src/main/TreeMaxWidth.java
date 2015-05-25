@@ -1,5 +1,8 @@
 package main;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import main.BinarySearchTree.BSTNode;
 
 /**
@@ -62,5 +65,29 @@ public class TreeMaxWidth {
     } else {
       return 1 + rightHeight;
     }
+  }
+
+  public int getMaxWidthIterative(BSTNode root) {
+    if (root == null)
+      return 0;
+
+    Queue<BSTNode> queue = new LinkedList<BSTNode>();
+    queue.add(root);
+    int maxWidth = Integer.MIN_VALUE;
+    while (!queue.isEmpty()) {
+      int nodesAtLevel = queue.size();
+      if (nodesAtLevel > maxWidth)
+        maxWidth = nodesAtLevel;
+
+      while (nodesAtLevel > 0) {
+        BSTNode node = queue.remove();
+        if (node.left != null)
+          queue.add(node.left);
+        if (node.right != null)
+          queue.add(node.right);
+        --nodesAtLevel;
+      }
+    }
+    return maxWidth;
   }
 }
