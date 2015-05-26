@@ -47,4 +47,32 @@ public class LongestCommonSubstring {
     }
     return substringLength;
   }
+
+  public String getLongestCommonSubstring(String s1, String s2) {
+    int[][] lengths = new int[s1.length() + 1][s2.length() + 1];
+
+    for (int i = 0; i < s1.length(); i++) {
+      for (int j = 0; j < s2.length(); j++) {
+        if (s1.charAt(i) == s2.charAt(j))
+          lengths[i + 1][j + 1] = lengths[i][j] + 1;
+        else
+          lengths[i + 1][j + 1] = Math.max(lengths[i + 1][j], lengths[i][j + 1]);
+      }
+    }
+
+    StringBuffer sb = new StringBuffer();
+    for (int x = s1.length(), y = s2.length(); x != 0 && y != 0;) {
+      if (lengths[x][y] == lengths[x - 1][y])
+        x--;
+      else if (lengths[x][y] == lengths[x][y - 1])
+        y--;
+      else {
+        sb.append(s1.charAt(x - 1));
+        x--;
+        y--;
+      }
+    }
+
+    return sb.reverse().toString();
+  }
 }
